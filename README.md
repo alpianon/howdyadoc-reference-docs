@@ -10,14 +10,19 @@ Uncompressed source dirs have the same name and extension of the reference docum
 
 `xmllint` (ubuntu package `libxml2-utils`), `zip`, `unzip`
 
-# Usage/Workflow
+## Usage/Workflow
 
 A) To create a new model:
-    1. Compile pandoc's base reference model[^pandoc], if you have not already done it: `make build/reference.docx` or `make build/reference.odt`
-    2. modify it with MS Word or Libreoffice
-    3. save it with a different name within `build/` (e.g. `build/my-new-model.docx`)
-    4. decompile it with `make src/my-new-model.docx`
-    5. (optional) check the differences between pandoc's base reference document source and your new model's source, to check if some manual fix is needed
+
+  1. Compile pandoc's base reference model, if you have not already done it: `make build/reference.docx` or `make build/reference.odt`
+
+  2. modify it with MS Word or Libreoffice
+
+  3. save it with a different name within `build/` (e.g. `build/my-new-model.docx`)
+
+  4. decompile it with `make src/my-new-model.docx`
+
+  5. (optional) check the differences between pandoc's base reference document source and your new model's source, to check if some manual fix is needed
 
 B) You can just do `make sources` to decompile all models within `build/`(**warning**: if will always decompile all models - overwriting the corresponding folders! - not only the new ones)
 
@@ -25,4 +30,6 @@ C) To use an existing model (say, `my-new-model.docx`), compile it with `make bu
 
 D) You can just do `make` (or `make models`) to compile all sources (**warning** it will overwrite the corresponding document models).
 
-[^pandoc]: Pandoc reference documents can be extracted with `pandoc -o reference.docx --print-default-data-file reference.docx` and `pandoc -o reference.odt --print-default-data-file reference.odt`
+### Note on pandoc reference documents
+
+Pandoc reference documents can be extracted with `pandoc -o reference.docx --print-default-data-file reference.docx` and `pandoc -o reference.odt --print-default-data-file reference.odt`
