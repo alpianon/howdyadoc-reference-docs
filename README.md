@@ -24,7 +24,7 @@ A) To create a new model:
 
   5. (optional) check the differences between pandoc's base reference document source and your new model's source, to check if some manual fix is needed
 
-B) You can just do `make sources` to decompile all models within `build/`(**warning**: if will always decompile all models - overwriting the corresponding folders! - not only the new ones)
+B) You can just do `make sources` to decompile all models within `build/`(**warning**: it will always decompile all models - overwriting the corresponding folders! - not only the new ones)
 
 C) To use an existing model (say, `my-new-model.docx`), compile it with `make build/my-new-model.docx`
 
