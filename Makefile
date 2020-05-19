@@ -3,23 +3,14 @@
 # SPDX-FileCopyrightText: 2020 Alberto Pianon <pianon@array.eu>
 # SPDX-License-Identifier: GPL-3.0-only
 #
-# 'make' or 'make model': compile (pack) OOXML and OpenDocument source dirs 
-# within SRCDIR into docx or odt files within BUILDDIR (source dirs must have
-# the same extension of the corresponding target file, like 'document.docx')
-# 
-# 'make source': decompile (unpack and pretty format) OOXML and Opendocument
-# files within BUILDDIR into source dirs within SRCDIR (source dirs will have
-# the same extension of the corresponding file in BUILDDIR, like 
-# 'document.docx')
-#
-# There is no 'make clean' because it could be dangerous
+# How does it work? See comments in 'noaction' and 'clean' sections below
 
 # https://stackoverflow.com/a/12959764
 # Make does not offer a recursive wildcard function, so here's one:
 rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
 SRCDIR=src
-BUILDDIR=build
+BUILDDIR=.
 
 MKDIR=/bin/mkdir
 ZIP=/usr/bin/zip
@@ -40,6 +31,29 @@ DIRECT_TARGET=$(foreach d, $(SRC_MODEL_DIRS), $(BUILDDIR)/$(notdir $d))
 # source and target to decompile document models into sources
 REVERSE_SRC=$(wildcard $(BUILDDIR)/*.*)
 REVERSE_TARGET=$(foreach d, $(REVERSE_SRC), $(SRCDIR)/$(notdir $d))
+
+noaction:
+	# There is no default action here, on purpose. Since here 'make' is used both
+	# to compile and to decompile, there is the risk to inadvertently overwrite
+	# changes to compiled files you just made with Libreoffice / MS word etc.; so
+	# you have to explicitly declare which model file or source folder has to be
+	# made via 'make', e.g:
+	#   1. if you are willing to make sources from example.docx file you have just
+	#      edited in Libreoffice: 
+	#      make src/example.docx 
+	#   2. if you are willing to make the model file from sources:
+	#      make example.docx
+	# You can also perform bulk actions, if you know what you are doing:
+	#   a. 'make models' will compile all sources to model files, overwriting the
+	#      existing ones if they are older than source files (you will lose any 
+	#      modifications made with Libreoffice/MS Word!)
+	#   b. 'make sources' will decompile all model files to source directories,
+	#      overwriting the existing ones
+
+clean:
+	# There is no clean action here, on purpose. Since 'make' is used both to
+	# compile and to decompile, there is the risk to inadvertently delete the
+	# wrong files or directories. Please manually delete what you want to delete.
 
 models: $(DIRECT_TARGET)
 
