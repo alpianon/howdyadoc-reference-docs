@@ -26,7 +26,7 @@ A) To create a new model:
 
   4. decompile it with `make src/my-new-model.docx`
 
-  5. (optional) check the differences between pandoc's base reference document source and your new model's source, to check if some fixes are needed.
+  5. (optional) check the differences between pandoc's base reference document source and your new model's source, to check if some fixes are needed, and recompile the model document with `make my-new-model.docx`
 
 B) You can just do `make sources` to decompile all models within root dir (**warning**: it will always decompile all models - overwriting the corresponding folders! - not only the new ones)
 
