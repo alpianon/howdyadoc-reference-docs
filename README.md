@@ -1,6 +1,6 @@
 # howdyadoc/pandoc-ref
 
-Template repository for docx and odt reference documents for pandoc for the howdyadoc workflow, intended to be used as a git sub-module in howdyadoc projects.
+Template repository for docx and odt reference documents for pandoc, intended to be used as a git sub-module in howdyadoc projects/workflows.
 
 ## 1. Rationale and repo structure
 
